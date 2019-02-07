@@ -144,9 +144,14 @@ class XMLwriter(object):
             value = self._escape_attributes(value)
             attr += ' %s="%s"' % (key, value)
 
-        self.fh.write("""<c%s><f>%s</f><v>%s</v></c>"""
+        value_tag = (
+            '<v>%s</v>' % self._escape_data(result)
+            if result is not None else '<v/>'
+        )
+
+        self.fh.write("""<c%s><f>%s</f>%s</c>"""
                       % (attr, self._escape_data(formula),
-                         self._escape_data(result)))
+                         value_tag))
 
     def _xml_inline_string(self, string, preserve, attributes=[]):
         # Optimized tag writer for inlineStr cell elements in the inner loop.

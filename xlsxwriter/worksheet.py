@@ -614,7 +614,7 @@ class Worksheet(xmlwriter.XMLwriter):
         return 0
 
     @convert_cell_args
-    def write_formula(self, row, col, formula, cell_format=None, value=0):
+    def write_formula(self, row, col, formula, cell_format=None, value=None):
         """
         Write a formula to a worksheet cell.
 
@@ -623,7 +623,7 @@ class Worksheet(xmlwriter.XMLwriter):
             col:         The cell column (zero indexed).
             formula:     Cell formula.
             cell_format: An optional cell Format object.
-            value:       An optional value for the formula. Default is 0.
+            value:       An optional value for the formula.
 
         Returns:
             0:  Success.
@@ -634,7 +634,7 @@ class Worksheet(xmlwriter.XMLwriter):
         return self._write_formula(row, col, formula, cell_format, value)
 
     # Undecorated version of write_formula().
-    def _write_formula(self, row, col, formula, cell_format=None, value=0):
+    def _write_formula(self, row, col, formula, cell_format=None, value=None):
         if self._check_dimensions(row, col):
             return -1
 
@@ -658,7 +658,7 @@ class Worksheet(xmlwriter.XMLwriter):
 
     @convert_range_args
     def write_array_formula(self, first_row, first_col, last_row, last_col,
-                            formula, cell_format=None, value=0):
+                            formula, cell_format=None, value=None):
         """
         Write a formula to a worksheet cell.
 
@@ -669,7 +669,7 @@ class Worksheet(xmlwriter.XMLwriter):
             last_col:     The last column of the cell range.
             formula:      Cell formula.
             cell_format:  An optional cell Format object.
-            value:        An optional value for the formula. Default is 0.
+            value:        An optional value for the formula.
 
         Returns:
             0:  Success.
@@ -681,7 +681,7 @@ class Worksheet(xmlwriter.XMLwriter):
 
     # Undecorated version of write_array_formula().
     def _write_array_formula(self, first_row, first_col, last_row, last_col,
-                             formula, cell_format=None, value=0):
+                             formula, cell_format=None, value=None):
 
         # Swap last row/col with first row/col as necessary.
         if first_row > last_row:
